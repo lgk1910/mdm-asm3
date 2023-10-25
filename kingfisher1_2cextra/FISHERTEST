@@ -1,0 +1,13 @@
+If you want to evaluate only Fisher's p-values (or ln(p)s), you can
+modify fishertest.c. Compile:
+gcc -Wall fishertest.c measures.c error.c glob.c -o fishertest -lm
+and run: ./fishertest
+
+The related code for calculating Fiher's exact test can be found in measures.c.
+Two important tricks:
+1. In non-trivial data, p-values tend to become extremely small, and there
+is not enough precision to present them. Therefor, all calculations are
+done using natural logarithms of p:s.
+2. To save time, all ln-factorials ln(2!), ln(3!) etc are calculated just once
+and stored in a table, since they are needed multiple times in the Kingfisher
+program.
